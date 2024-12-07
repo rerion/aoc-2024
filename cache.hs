@@ -6,7 +6,10 @@ newtype Cache k v s = Cache ((Map.Map k v) -> (Map.Map k v, s)) deriving (Functo
 
 instance (Ord k) => Applicative (Cache k v) where
   pure v = Cache $ \c -> (c, v)
-  liftA2 f (Cache a) (Cache b) = Cache $ \c -> (c, f (snd $ a c) (snd $ b c))
+  f <*> x = do
+    xx <- x
+    ff <- f
+    return $ ff xx
 
 instance (Ord k) => Monad (Cache k v) where
   (Cache getA) >>= f = Cache $ \c -> let (cc, res) = getA c in let (Cache ff) = f res in ff cc
