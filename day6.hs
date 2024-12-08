@@ -8,6 +8,7 @@ import Debug.Trace
 debug :: (Show a) => a -> a
 debug a = trace ("Got: " ++ show a) a
 
+-- stupid; use Array (Int, Int) Char -- see day 8
 type Input = Array Int (Array Int Char)
 
 infix 8 <|
