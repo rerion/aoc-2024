@@ -1,4 +1,3 @@
-import Cache
 import Data.Array
 import Data.List
 import Debug.Trace
